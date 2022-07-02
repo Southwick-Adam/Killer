@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/Game/Map/MiniMap.gd" type="Script" id=1]
+[ext_resource path="res://assets/Game/Map/MiniMap/miniRoom.png" type="Texture" id=2]
+[ext_resource path="res://assets/Game/Map/MiniMap/miniConnect.png" type="Texture" id=3]
+
+[node name="MiniMap" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="player" type="Sprite" parent="."]
+self_modulate = Color( 0, 1, 0.0392157, 1 )
+texture = ExtResource( 3 )
+
+[node name="back" type="Sprite" parent="."]
+self_modulate = Color( 0.192157, 0.192157, 0.192157, 0.882353 )
+position = Vector2( 519, 292 )
+z_index = -1
+texture = ExtResource( 2 )
+
+[node name="corridors" type="Position2D" parent="."]

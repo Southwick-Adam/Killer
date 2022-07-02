@@ -1,0 +1,62 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scenes/Game/Map/MiniMap.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/Game/Map/MiniMap/miniRoom.png" type="Texture" id=2]
+[ext_resource path="res://scripts/Game/Map/MiniMap.gd" type="Script" id=3]
+[ext_resource path="res://scenes/Game/Map/Shadow.tscn" type="PackedScene" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 31.5, 32 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 5, 5 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 32, 32 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 35, 35 )
+
+[node name="killer" type="Node2D"]
+
+[node name="body" type="KinematicBody2D" parent="." groups=["player_body"]]
+
+[node name="Sprite" type="Sprite" parent="body"]
+self_modulate = Color( 0.211765, 0.917647, 0.521569, 1 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="body"]
+visible = false
+position = Vector2( -0.5, 0 )
+shape = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="body"]
+current = true
+smoothing_enabled = true
+
+[node name="door_trigger" type="Area2D" parent="body" groups=["body_area"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="body/door_trigger"]
+position = Vector2( 0, 0.5 )
+shape = SubResource( 2 )
+
+[node name="area" type="Area2D" parent="body"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="body/area"]
+shape = SubResource( 3 )
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="body"]
+shape = SubResource( 4 )
+shape_centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Shadow" type="Node2D" parent="." instance=ExtResource( 4 )]
+visible = false
+z_index = 50
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="MiniMap" type="Node2D" parent="HUD" instance=ExtResource( 1 )]
+visible = false
+script = ExtResource( 3 )

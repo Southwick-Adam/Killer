@@ -1,0 +1,3 @@
+[gd_scene format=2]
+
+[node name="power_tree" type="Node2D"]

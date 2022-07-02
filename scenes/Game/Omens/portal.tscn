@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/Game/Omens/ext_slot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/Game/Map/MiniMap/miniRoom.png" type="Texture" id=2]
+[ext_resource path="res://scripts/Game/Omens/ext_slot.gd" type="Script" id=3]
+[ext_resource path="res://scripts/Game/Omens/portal.gd" type="Script" id=4]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 59.5399
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 32, 32 )
+
+[node name="portal" type="Node2D" groups=["omen", "portal"]]
+script = ExtResource( 4 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Area2D"]
+self_modulate = Color( 0.898039, 0.964706, 0.113725, 1 )
+texture = ExtResource( 2 )
+
+[node name="light" type="Sprite" parent="Area2D/Sprite"]
+visible = false
+modulate = Color( 1, 1, 1, 0.25098 )
+show_behind_parent = true
+scale = Vector2( 1.1, 1.1 )
+texture = ExtResource( 2 )
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+shape = SubResource( 3 )
+shape_centered = false
+
+[node name="ext_slot" type="Node2D" parent="." groups=["slot"] instance=ExtResource( 1 )]
+visible = false
+z_index = 10
+script = ExtResource( 3 )
+
+[connection signal="pressed" from="TouchScreenButton" to="." method="_on_TouchScreenButton_pressed"]
